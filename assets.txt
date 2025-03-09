@@ -1,0 +1,2 @@
+"C:\Program Files (x86)\GnuWin32\lib\libfl.a"
+"C:\Bison\lib\liby.a"

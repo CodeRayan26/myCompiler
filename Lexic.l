@@ -1,17 +1,18 @@
 %{
     // c declaration
-   
-    int yywrap(void) { return 1; }
-    int nbl = 1;
+    #include "Syntax.tab.h"
+    extern int nbl;
 
 %}
+
 
 /* declaration des commentaires*/
 cmnt1 "<!-".*"-!>"
 cmnt2 "{--"(.|\n)*"--}"
 
 /* declaration des regex de base*/
-ltr [a-z] /*prof 9atelna bli minuscules brk, rassim a9raa mlih mrakch 3ajbni*/
+ltr [a-z] 
+        /*prof 9atelna bli minuscules brk, rassim a9raa mlih mrakch 3ajbni*/
 cfr [0-9]
 
 /*declaration des mot cle*/
@@ -20,6 +21,9 @@ var "var"
 begin "BeginPg"
 end "EndPg"
 let "let"
+
+/*declaration des mot reserver au instruction*/
+
 
 /* declaration des types*/
 type ("int"|"float")
@@ -33,10 +37,11 @@ cnst {cfr}+
 idf {ltr}({cfr}|{ltr}|_{cfr}|_{ltr})+
 
 /*partie instruction*/
-mc_if "if"
 po "("
 pf ")"
 cmpr "=="|"<"|">"|"<="|">="
+pvg ";"
+aff ":="
 
 
 
@@ -61,17 +66,14 @@ cmpr "=="|"<"|">"|"<="|">="
 
 {idf} {
     if(yyleng > 14) printf(" idf trop long;");
-    else printf(" %s idf", yytext);
+    else printf(" %s idf;", yytext);
 }
 
-{cmpr} {printf("comparaison sign");}
+{cmpr} {printf(" comparaison sign");}
 
 \n {nbl++; printf("\n");}
 . {printf(" est une erreur;");}
 
 %%
 
-int main(){
-    yylex();
-    return 0;
-}
+int yywrap(void) { return 1; }

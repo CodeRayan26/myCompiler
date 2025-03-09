@@ -1,8 +1,1 @@
-(-9)
-{-- hello dora
-dora --}
-<!- coucou -!>
-rj_hf34skldflshkfjshfj
-int<=
->
-==
+x:=5;
