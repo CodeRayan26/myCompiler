@@ -19,7 +19,8 @@ int main(){
     yyparse();
     return 0;
 }
-
+yywrap()
+{}
 int yyerror(char *msg){
     printf("erreur syntaxic met a la ligne %d;",nbl);
     return 1;
