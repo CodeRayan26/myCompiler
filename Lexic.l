@@ -12,7 +12,7 @@ cmnt2 "{--"(.|\n)*"--}"
 
 /* declaration des regex de base*/
 ltr [a-z] 
-        /*prof 9atelna bli minuscules brk, rassim a9raa mlih mrakch 3ajbni*/
+       
 cfr [0-9]
 
 /*declaration des mot cle*/
