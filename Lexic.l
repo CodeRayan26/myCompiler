@@ -92,8 +92,8 @@ bf "]"
 {begin}       { printf("%s\n", yytext); }
 {end}         { printf("%s\n", yytext); }
 {let}         { printf("%s\n", yytext); }
-{int}      { printf("%s\n", yytext); }
-{float}        { printf("%s\n", yytext); }
+{int}         { printf("%s\n", yytext); }
+{float}       { printf("%s\n", yytext); }
 {const}       { printf("%s\n", yytext); }
 {debutC}      { printf("%s\n", yytext); }
 {cond}        { printf("%s\n", yytext); }
@@ -113,7 +113,7 @@ bf "]"
 
 {idf} {
     if(yyleng > 14) printf(" idf trop long;");
-    else printf(" %s idf;", yytext);
+    else printf(" idf %s ", yytext);
 }
 
 {reel}       { printf("%s\n", yytext); }
