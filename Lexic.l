@@ -58,10 +58,10 @@ or      "OR"
 not     "!"
 
 /* Opérateurs de comparaison */
-gt         ">"
-lt         "<"
-ge         ">="
-le         "<="
+gt        ">"
+lt        "<"
+ge        ">="
+le        "<="
 eq        "=="
 ne        "!="
 
