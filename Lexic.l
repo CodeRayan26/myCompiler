@@ -2,7 +2,6 @@
     // c declaration
     #include "Syntax.tab.h"
     extern int nbl;
-
 %}
 
 
@@ -12,7 +11,6 @@ cmnt2 "{--"(.|\n)*"--}"
 
 /* declaration des regex de base*/
 ltr [a-z] 
-       
 cfr [0-9]
 
 /*declaration des mot cle*/
@@ -22,12 +20,8 @@ begin "BeginPg"
 end "EndPg"
 let "let"
 
-/*declaration des mot reserver au instruction*/
-
-
 /* declaration des types*/
 type ("int"|"float")
-
 
 /* declaration des valeure numerique*/
 cfrs \([+-]{cfr}+\)
@@ -42,10 +36,6 @@ pf ")"
 cmpr "=="|"<"|">"|"<="|">="
 pvg ";"
 aff ":="
-
-
-
-
 
 %%
 
