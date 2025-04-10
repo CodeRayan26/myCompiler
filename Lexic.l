@@ -92,8 +92,8 @@ bf "]"
 {begin}       { printf("%s\n", yytext); }
 {end}         { printf("%s\n", yytext); }
 {let}         { printf("%s\n", yytext); }
-{entier}      { printf("%s\n", yytext); }
-{reel}        { printf("%s\n", yytext); }
+{int}      { printf("%s\n", yytext); }
+{float}        { printf("%s\n", yytext); }
 {const}       { printf("%s\n", yytext); }
 {debutC}      { printf("%s\n", yytext); }
 {cond}        { printf("%s\n", yytext); }
