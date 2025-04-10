@@ -385,17 +385,14 @@ char *yytext;
     // c declaration
     #include "Syntax.tab.h"
     extern int nbl;
-
 /* declaration des commentaires*/
 /* declaration des regex de base*/
-/*prof 9atelna bli minuscules brk, rassim a9raa mlih mrakch 3ajbni*/
 /*declaration des mot cle*/
-/*declaration des mot reserver au instruction*/
 /* declaration des types*/
 /* declaration des valeure numerique*/
 /*declaration idf*/
 /*partie instruction*/
-#line 399 "lex.yy.c"
+#line 396 "lex.yy.c"
 
 /* Macros after this point can all be overridden by user definitions in
  * section 1.
@@ -546,10 +543,10 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
 
-#line 50 "Lexic.l"
+#line 40 "Lexic.l"
 
 
-#line 553 "lex.yy.c"
+#line 550 "lex.yy.c"
 
 	if ( yy_init )
 		{
@@ -634,12 +631,12 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 52 "Lexic.l"
+#line 42 "Lexic.l"
 {printf(" Ligne %d est un commentaire;", nbl);}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 53 "Lexic.l"
+#line 43 "Lexic.l"
 {
     /*i can't explain cmnt2 in a comment, if you didn't understand call me*/
     int cmnt2 = 0;
@@ -652,17 +649,17 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 64 "Lexic.l"
+#line 54 "Lexic.l"
 {printf(" %s est un chiffre signee;", yytext);}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 65 "Lexic.l"
+#line 55 "Lexic.l"
 {printf(" %s cnst", yytext);}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 67 "Lexic.l"
+#line 57 "Lexic.l"
 {
     if(yyleng > 14) printf(" idf trop long;");
     else printf(" %s idf;", yytext);
@@ -670,25 +667,25 @@ YY_RULE_SETUP
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 72 "Lexic.l"
+#line 62 "Lexic.l"
 {printf(" comparaison sign");}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 74 "Lexic.l"
+#line 64 "Lexic.l"
 {nbl++; printf("\n");}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 75 "Lexic.l"
+#line 65 "Lexic.l"
 {printf(" est une erreur;");}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 77 "Lexic.l"
+#line 67 "Lexic.l"
 ECHO;
 	YY_BREAK
-#line 692 "lex.yy.c"
+#line 689 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1574,7 +1571,7 @@ int main()
 	return 0;
 	}
 #endif
-#line 77 "Lexic.l"
+#line 67 "Lexic.l"
 
 
 int yywrap(void) { return 1; }
