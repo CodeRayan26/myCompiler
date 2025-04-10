@@ -384,7 +384,7 @@ char *yytext;
 #line 2 "Lexic.l"
     // c declaration
     #include "Syntax.tab.h"
-    extern int nbl;
+    int nbl;
 /* declaration des commentaires*/
 /* declaration des regex de base*/
 /*declaration des mot cle*/
