@@ -11,17 +11,18 @@ cmnt2 "{--"(.|\n)*"--}"
 ltr [a-z] 
 cfr [0-9]
 pvg ";"
-
+dp ":"
+string  \"[^\"]*\"
 
 /*declaration des mot cle*/
 mainprgm  "MainPrgm"
-var       "var"
+var       "Var"
 begin     "BeginPg"
 end       "EndPg"
 let       "let"
 int       "int"
 float     "float"
-const     "const"
+const     "Const"
 debutC    "@define"
 cond      "if"
 then      "then"
@@ -70,6 +71,8 @@ po "("
 pf ")"
 bo "["
 bf "]"
+bro"{"
+brf"}"
 
 
 
@@ -87,62 +90,66 @@ bf "]"
     nbl = nbl+cmnt2;
 }
 
-{mainprgm}    { printf("%s\n", yytext); }
-{var}         { printf("%s\n", yytext); }
-{begin}       { printf("%s\n", yytext); }
-{end}         { printf("%s\n", yytext); }
-{let}         { printf("%s\n", yytext); }
-{int}         { printf("%s\n", yytext); }
-{float}       { printf("%s\n", yytext); }
-{const}       { printf("%s\n", yytext); }
-{debutC}      { printf("%s\n", yytext); }
-{cond}        { printf("%s\n", yytext); }
-{then}        { printf("%s\n", yytext); }
-{else}        { printf("%s\n", yytext); }
-{do}          { printf("%s\n", yytext); }
-{boucle}      { printf("%s\n", yytext); }
-{boucle2}     { printf("%s\n", yytext); }
-{from}        { printf("%s\n", yytext); }
-{to}          { printf("%s\n", yytext); }
-{stepping}    { printf("%s\n", yytext); }
-{read}        { printf("%s\n", yytext); }
-{write}       { printf("%s\n", yytext); }
+{mainprgm}    { printf("%s\n", yytext);return MAINPRGM; }
+{var}         { printf("%s\n", yytext);return VAR; }
+{begin}       { printf("%s\n", yytext);return BEGINPG; }
+{end}         { printf("%s\n", yytext);return ENDPG; }
+{let}         { printf("%s\n", yytext);return LET; }
+{int}         { printf("%s\n", yytext);return INT; }
+{float}       { printf("%s\n", yytext);return FLOAT; }
+{const}       { printf("%s\n", yytext);return CONST; }
+{debutC}      { printf("%s\n", yytext);return DEFINE; }
+{cond}        { printf("%s\n", yytext);return IF; }
+{then}        { printf("%s\n", yytext);return THEN; }
+{else}        { printf("%s\n", yytext);return ELSE; }
+{do}          { printf("%s\n", yytext);return DO; }
+{boucle}      { printf("%s\n", yytext);return WHILE; }
+{boucle2}     { printf("%s\n", yytext);return FOR; }
+{from}        { printf("%s\n", yytext);return FROM; }
+{to}          { printf("%s\n", yytext);return TO; }
+{stepping}    { printf("%s\n", yytext);return STEP;}
+{read}        { printf("%s\n", yytext);return INPUT; }
+{write}       { printf("%s\n", yytext);return OUTPUT; }
 
-
-{pvg}         { printf("%s\n", yytext); }
+{string}      { printf("%s\n", yytext);return STRING; }
+{pvg}         { printf("%s\n", yytext);return pvg; }
+{db}          { printf("%s\n", yytext); }
 
 {idf} {
     if(yyleng > 14) printf(" idf trop long;");
-    else printf(" idf %s ", yytext);
+    else {printf(" %s idf", yytext);return IDF;}
 }
 
-{reel}       { printf("%s\n", yytext); }
-{reels}      { printf("%s\n", yytext); }
-{entier}     { printf("%s\n", yytext); }
-{entiers}    { printf("%s\n", yytext); }
+{reel}       { printf("%s\n", yytext);return REEL; }
+{reels}      { printf("%s\n", yytext);return REEELS; }
+{entier}     { printf("%s\n", yytext);return ENTIER; }
+{entiers}    { printf("%s\n", yytext);return ENTIERS;}
 
 
-{add}        { printf("%s\n", yytext); }
-{sub}        { printf("%s\n", yytext); }
-{mul}        { printf("%s\n", yytext); }
-{div}        { printf("%s\n", yytext); }
-{aff}        { printf("%s\n", yytext); }
+{add}        { printf("%s\n", yytext);return ADD; }
+{sub}        { printf("%s\n", yytext);return SUB; }
+{mul}        { printf("%s\n", yytext);return MUL; }
+{div}        { printf("%s\n", yytext);return DIV; }
+{aff}        { printf("%s\n", yytext);return AFF; }
 
-{and}        { printf("%s\n", yytext); }
-{or}         { printf("%s\n", yytext); }
-{not}        { printf("%s\n", yytext); }
+{and}        { printf("%s\n", yytext);return AND; }
+{or}         { printf("%s\n", yytext);return OR; }
+{not}        { printf("%s\n", yytext);return NOT; }
 
-{gt}         { printf("%s\n", yytext); }
-{lt}         { printf("%s\n", yytext); }
-{ge}         { printf("%s\n", yytext); }
-{le}         { printf("%s\n", yytext); }
-{eq}         { printf("%s\n", yytext); }
-{ne}         { printf("%s\n", yytext); }
+{gt}         { printf("%s\n", yytext);return GT; }
+{lt}         { printf("%s\n", yytext);return LT; }
+{ge}         { printf("%s\n", yytext);return GE; }
+{le}         { printf("%s\n", yytext);return LE; }
+{eq}         { printf("%s\n", yytext);return EQ; }
+{ne}         { printf("%s\n", yytext);return NE; }
+
 
 {po}         { printf("%s\n", yytext); }
 {pf}         { printf("%s\n", yytext); }
 {bo}         { printf("%s\n", yytext); }
 {bf}         { printf("%s\n", yytext); }
+{bro}        { printf("%s\n", yytext); }
+{brf}        { printf("%s\n", yytext); }
 
 \n {nbl++; printf("\n");}
 
