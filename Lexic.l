@@ -1,5 +1,6 @@
 %{
-   int nbl;
+  #include "syntax.tab.h"
+  int nbl=1;
 %}
 
 
@@ -20,8 +21,8 @@ var       "Var"
 begin     "BeginPg"
 end       "EndPg"
 let       "let"
-int       "int"
-float     "float"
+int       "Int"
+float     "Float"
 const     "Const"
 debutC    "@define"
 cond      "if"
@@ -112,8 +113,8 @@ brf"}"
 {write}       { printf("%s\n", yytext);return OUTPUT; }
 
 {string}      { printf("%s\n", yytext);return STRING; }
-{pvg}         { printf("%s\n", yytext);return pvg; }
-{db}          { printf("%s\n", yytext); }
+{pvg}         { printf("%s\n", yytext);return PVG; }
+{dp}          { printf("%s\n", yytext); }
 
 {idf} {
     if(yyleng > 14) printf(" idf trop long;");
@@ -121,7 +122,7 @@ brf"}"
 }
 
 {reel}       { printf("%s\n", yytext);return REEL; }
-{reels}      { printf("%s\n", yytext);return REEELS; }
+{reels}      { printf("%s\n", yytext);return REELS; }
 {entier}     { printf("%s\n", yytext);return ENTIER; }
 {entiers}    { printf("%s\n", yytext);return ENTIERS;}
 
@@ -153,7 +154,7 @@ brf"}"
 
 \n {nbl++; printf("\n");}
 
-. {printf(" est une erreur;");}
+. {printf(" '%s' est une erreur à la ligne %d ;\n", yytext, nbl);}
 
 %%
 

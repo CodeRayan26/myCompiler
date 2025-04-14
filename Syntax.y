@@ -1,7 +1,7 @@
 %{
 #include <stdio.h>
 #include <stdlib.h>
-#include "symbole.h"
+int yylex(void);
 void yyerror(const char *s);
 %}
 
@@ -11,17 +11,22 @@ void yyerror(const char *s);
 }
 
 %token MAINPRGM VAR BEGINPG ENDPG LET IDF IF THEN ELSE DO WHILE FOR FROM TO STEP INPUT OUTPUT
-%token <strval> ID
-%token <ival> INT
+%token INT FLOAT CONST DEFINE 
+%token REEL REELS STRING ENTIER ENTIERS
+
+%token ADD SUB MUL DIV AFF
+%token AND OR NOT
+%token GT LT GE LE EQ NE GTE LTE NEQ
+%token PVG
 
 %%
 programme : MAINPRGM IDF ';' VAR declarations BEGINPG '{' instructions '}' ENDPG { printf("Programme valide\n"); };
 
 declarations : declaration declarations | declaration | /* epsilon */;
 
-declaration : LET var_list ':' type pvg
-             | LET var_list ':' '[' type pvg ENTIER ']' pvg
-             | DEFINE CONST IDF ':' type '=' ENTIER pvg;
+declaration : LET var_list ':' type PVG
+             | LET var_list ':' '[' type PVG ENTIER ']' PVG
+             | DEFINE CONST IDF ':' type '=' ENTIER PVG;
 
 var_list: IDF ',' var_list | IDF;
 
@@ -41,10 +46,10 @@ condition : IF '(' cheking ')' THEN '{' instructions '}' ELSE '{' instructions '
 boucle : DO '{' instructions '}' WHILE '(' cheking ')' PVG;
        | FOR IDF FROM INT TO INT STEP ENTIER '{' instructions '}';
 
-io : INPUT '(' IDF ')' pvg
-   | OUTPUT '(' OP ')' pvg;
+io : INPUT '(' IDF ')' PVG
+   | OUTPUT '(' OP ')' PVG;
 
-OP : OP2 |OP2,OP; 
+OP : OP2 |OP2','OP; 
 OP2: STRING | IDF;
 
 expression : REEL | REELS | ENTIER | ENTIERS | IDF | expression ADD expression | expression SUB expression
