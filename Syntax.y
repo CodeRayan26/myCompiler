@@ -55,7 +55,7 @@ OP2: STRING | IDF;
 expression : REEL | REELS | ENTIER | ENTIERS | IDF | expression ADD expression | expression SUB expression
            | expression MUL expression | expression DIV expression;
 
-cheking :  | expression AND expression | expression OR expression | NOT expression
+cheking :  expression AND expression | expression OR expression | NOT expression
            | expression GT expression | expression LT expression | expression EQ expression ;
 
           
