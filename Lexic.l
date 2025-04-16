@@ -9,7 +9,7 @@ cmnt1 "<!-".*"-!>"
 cmnt2 "{--"(.|\n)*"--}"
 
 /* declaration des regex de base*/
-ltr [a-zA-Z] 
+ltr [a-z] 
 cfr [0-9]
 pvg ";"
 dp ":"
