@@ -79,10 +79,7 @@
      LE = 295,
      EQ = 296,
      NE = 297,
-     GTE = 298,
-     LTE = 299,
-     NEQ = 300,
-     PVG = 301
+     PVG = 298
    };
 #endif
 
@@ -101,7 +98,7 @@ typedef union YYSTYPE
 
 
 /* Line 1676 of yacc.c  */
-#line 105 "syntax.tab.h"
+#line 102 "syntax.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

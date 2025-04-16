@@ -1,1 +1,8 @@
-x:=5;
+Var L3_software;
+Var 
+
+BeginPg 
+{
+
+}
+EndPg

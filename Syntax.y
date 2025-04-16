@@ -16,7 +16,7 @@ void yyerror(const char *s);
 
 %token ADD SUB MUL DIV AFF
 %token AND OR NOT
-%token GT LT GE LE EQ NE GTE LTE NEQ
+%token GT LT GE LE EQ NE 
 %token PVG
 
 %%
@@ -56,9 +56,7 @@ expression : REEL | REELS | ENTIER | ENTIERS | IDF | expression ADD expression |
            | expression MUL expression | expression DIV expression;
 
 cheking :  | expression AND expression | expression OR expression | NOT expression
-           | expression GT expression | expression LT expression
-           | expression GTE expression | expression LTE expression
-           | expression EQ expression | expression NEQ expression;
+           | expression GT expression | expression LT expression | expression EQ expression ;
 
           
 
