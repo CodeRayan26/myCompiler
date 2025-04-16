@@ -55,7 +55,7 @@ instruction : affectation PVG
             | boucle
             | io PVG;
 
-affectation : IDF AFF expression | IDF BO ENTIER BF AFF expression;
+affectation : IDF AFF expression | IDF BO expression BF AFF expression ;
 
 condition : IF PO cheking PF THEN BRO instructions BRF ELSE BRO instructions BRF;
 
