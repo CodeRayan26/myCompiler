@@ -1,6 +1,5 @@
 %{
 #include <stdio.h>
-#include <stdlib.h>
 int yylex(void);
 void yyerror(const char *s);
 int nbl=1;
@@ -8,13 +7,15 @@ int nbl=1;
 
 %union {
     int ival;
+    float fval;
     char *strval;
 }
+
 %start programme
 %token MAINPRGM VAR BEGINPG ENDPG LET IDF IF THEN ELSE DO WHILE FOR FROM TO STEP INPUT OUTPUT
 %token INT FLOAT CONST DEFINE 
 %token REEL REELS STRING ENTIER ENTIERS
-%token EQUAL
+%token EQUAL ERR
 
 %token ADD SUB MUL DIV AFF
 %token AND OR NOT
@@ -24,12 +25,16 @@ int nbl=1;
 %left OR
 %left AND
 %left NOT
-%left EQ NE LT GT LE GE
+%nonassoc EQ NE LT GT LE GE
 %left ADD SUB
 %left MUL DIV
 
 %%
-programme : MAINPRGM IDF PVG VAR declarations  BEGINPG BRO instructions BRF ENDPG PVG { printf("Programme valide\n");YYACCEPT; };
+programme : MAINPRGM IDF PVG VAR declarations  BEGINPG BRO instructions BRF ENDPG PVG 
+  { 
+    printf("Programme valide\n");
+    return 0; 
+    };
 
 declarations : declaration declarations | declaration | /* epsilon */;
 
@@ -43,7 +48,7 @@ value : ENTIER | ENTIERS | REEL | REELS;
 
 type: INT | FLOAT;
 
-instructions : instruction instructions | /* epsilon */;
+instructions : instructions instruction  | /* epsilon */;
 
 instruction : affectation PVG
             | condition
@@ -57,14 +62,15 @@ condition : IF PO cheking PF THEN BRO instructions BRF ELSE BRO instructions BRF
 boucle : DO BRO instructions BRF WHILE PO cheking PF PVG;
        | FOR IDF FROM expression TO expression STEP ENTIER BRO instructions BRF;
 
-io : INPUT PO IDF PF PVG
-   | OUTPUT PO OP PF PVG;
+io : INPUT PO IDF PF   
+   | OUTPUT PO OP PF ;
 
  
- OP : IDF | STRING | OP VG OP; 
+ OP : IDF | STRING | OP VG OP2; 
+ OP2 : IDF | STRING ;
 
 
-expression : REEL | REELS | ENTIER | ENTIERS | IDF | IDF BO expression BF expression ADD expression | expression SUB expression
+expression : REEL | REELS | ENTIER | ENTIERS | IDF | IDF BO expression BF | expression ADD expression | expression SUB expression
            | expression MUL expression | expression DIV expression;
 
 cheking :  expression AND expression | expression OR expression | NOT expression
@@ -73,11 +79,10 @@ cheking :  expression AND expression | expression OR expression | NOT expression
           
 
 %%
-
+int main() {
+    return yyparse();
+}
 void yyerror(const char *s) {
     fprintf(stderr, "Erreur syntaxique ligne %d: %s\n", nbl, s);
 }
 
-int main() {
-    return yyparse();
-}

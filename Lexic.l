@@ -97,7 +97,7 @@ brf"}"
 {mainprgm}    { printf("%s\n", yytext);return MAINPRGM; }
 {var}         { printf("%s\n", yytext);return VAR; }
 {begin}       { printf("%s\n", yytext);return BEGINPG; }
-{end}         { printf("%s\n", yytext);return ENDPG; }
+{end}        { printf("%s\n", yytext);return ENDPG; }
 {let}         { printf("%s\n", yytext);return LET; }
 {int}         { printf("%s\n", yytext);return INT; }
 {float}       { printf("%s\n", yytext);return FLOAT; }
@@ -169,8 +169,8 @@ brf"}"
 [ \t]+ ;   {/* ignorer les espaces et tabulations */}
 \n {nbl++; printf("\n");}
 
-. {printf(" '%s' est une erreur à la ligne %d ;\n", yytext, nbl);}
+. {printf(" '%s' est une erreur à la ligne %d ;\n", yytext, nbl);return ERR;}
 
 %%
 
-int yywrap(void) { return 1; }
+

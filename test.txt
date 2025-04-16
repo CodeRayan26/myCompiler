@@ -5,6 +5,3 @@ let x : Float;
 
 BeginPg
 {
-  input(x);
-  }
-EndPg
