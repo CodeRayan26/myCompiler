@@ -74,10 +74,11 @@
 #include <stdlib.h>
 int yylex(void);
 void yyerror(const char *s);
+extern int nbl
 
 
 /* Line 189 of yacc.c  */
-#line 81 "syntax.tab.c"
+#line 82 "syntax.tab.c"
 
 /* Enabling traces.  */
 #ifndef YYDEBUG
@@ -155,7 +156,7 @@ typedef union YYSTYPE
 {
 
 /* Line 214 of yacc.c  */
-#line 8 "syntax.y"
+#line 9 "syntax.y"
 
     int ival;
     char *strval;
@@ -163,7 +164,7 @@ typedef union YYSTYPE
 
 
 /* Line 214 of yacc.c  */
-#line 167 "syntax.tab.c"
+#line 168 "syntax.tab.c"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
@@ -175,7 +176,7 @@ typedef union YYSTYPE
 
 
 /* Line 264 of yacc.c  */
-#line 179 "syntax.tab.c"
+#line 180 "syntax.tab.c"
 
 #ifdef short
 # undef short
@@ -483,11 +484,11 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    23,    23,    25,    25,    25,    27,    28,    29,    31,
-      31,    33,    33,    35,    35,    37,    38,    39,    40,    42,
-      42,    44,    46,    47,    49,    50,    52,    52,    53,    53,
-      55,    55,    55,    55,    55,    55,    55,    56,    56,    58,
-      58,    58,    59,    59,    59
+       0,    24,    24,    26,    26,    26,    28,    29,    30,    32,
+      32,    34,    34,    36,    36,    38,    39,    40,    41,    43,
+      43,    45,    47,    48,    50,    51,    53,    53,    54,    54,
+      56,    56,    56,    56,    56,    56,    56,    57,    57,    59,
+      59,    59,    60,    60,    60
 };
 #endif
 
@@ -1467,14 +1468,14 @@ yyreduce:
         case 2:
 
 /* Line 1455 of yacc.c  */
-#line 23 "syntax.y"
+#line 24 "syntax.y"
     { printf("Programme valide\n"); ;}
     break;
 
 
 
 /* Line 1455 of yacc.c  */
-#line 1478 "syntax.tab.c"
+#line 1479 "syntax.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1686,7 +1687,7 @@ yyreturn:
 
 
 /* Line 1675 of yacc.c  */
-#line 63 "syntax.y"
+#line 64 "syntax.y"
 
 
 void yyerror(const char *s) {

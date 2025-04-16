@@ -9,7 +9,7 @@ cmnt1 "<!-".*"-!>"
 cmnt2 "{--"(.|\n)*"--}"
 
 /* declaration des regex de base*/
-ltr [a-z] 
+ltr [a-zA-Z] 
 cfr [0-9]
 pvg ";"
 dp ":"
@@ -133,9 +133,11 @@ brf"}"
 {div}        { printf("%s\n", yytext);return DIV; }
 {aff}        { printf("%s\n", yytext);return AFF; }
 
+
+
+{not}        { printf("%s\n", yytext);return NOT; }
 {and}        { printf("%s\n", yytext);return AND; }
 {or}         { printf("%s\n", yytext);return OR; }
-{not}        { printf("%s\n", yytext);return NOT; }
 
 {gt}         { printf("%s\n", yytext);return GT; }
 {lt}         { printf("%s\n", yytext);return LT; }
@@ -152,6 +154,7 @@ brf"}"
 {bro}        { printf("%s\n", yytext); }
 {brf}        { printf("%s\n", yytext); }
 
+[ \t]+    {/* ignorer les espaces et tabulations */}
 \n {nbl++; printf("\n");}
 
 . {printf(" '%s' est une erreur à la ligne %d ;\n", yytext, nbl);}
