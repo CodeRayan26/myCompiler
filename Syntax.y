@@ -44,7 +44,7 @@ affectation : IDF AFF expression | IDF "[" ENTIER "]" AFF expression;
 condition : IF '(' cheking ')' THEN '{' instructions '}' ELSE '{' instructions '}';
 
 boucle : DO '{' instructions '}' WHILE '(' cheking ')' PVG;
-       | FOR IDF FROM exoression TO expression STEP ENTIER '{' instructions '}';
+       | FOR IDF FROM expression TO expression STEP ENTIER '{' instructions '}';
 
 io : INPUT '(' IDF ')' PVG
    | OUTPUT '(' OP ')' PVG;

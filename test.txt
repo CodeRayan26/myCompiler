@@ -1,8 +1,6 @@
-Var L3_software;
-Var 
-
-BeginPg 
-{
-
-}
-EndPg
+MainPrgm monProg;
+Var
+  let x : Int;
+BeginPg {
+  input(x);
+} EndPg
