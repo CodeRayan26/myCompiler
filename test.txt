@@ -1,7 +1,24 @@
-MainPrgm monrog;
-
+MainPrgm l3_software ;
 Var
-let x : Float;
-
+    let x, y: Int;
+    let arr: [Int;10];
+    @define Const pi: Float = 3.14;
 BeginPg
 {
+    x := 10;
+    y := x * 2;
+    
+    if (x > y) then {
+        output("x is greater");
+    } else {
+        output("y is greater or equal");
+    }
+    
+    for i from 1 to 10 step 1 {
+        arr[i] := i * 2;
+    }
+    
+    input(x);
+    output("Result is", x);
+}
+EndPg ;
