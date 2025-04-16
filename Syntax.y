@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yylex(void);
-void yyerror(YYLTYPE *loc,const char *s);
+void yyerror(const char *s);
 int nbl=1;
 %}
 
@@ -14,11 +14,12 @@ int nbl=1;
 %token MAINPRGM VAR BEGINPG ENDPG LET IDF IF THEN ELSE DO WHILE FOR FROM TO STEP INPUT OUTPUT
 %token INT FLOAT CONST DEFINE 
 %token REEL REELS STRING ENTIER ENTIERS
+%token EQUAL
 
 %token ADD SUB MUL DIV AFF
 %token AND OR NOT
 %token GT LT GE LE EQ NE 
-%token PVG
+%token VG DP PVG PO PF BRO BRF BO BF
 
 %left OR
 %left AND
@@ -28,15 +29,15 @@ int nbl=1;
 %left MUL DIV
 
 %%
-programme : MAINPRGM IDF ';' VAR declarations BEGINPG '{' instructions '}' ENDPG { printf("Programme valide\n"); };
+programme : MAINPRGM IDF PVG VAR declarations  BEGINPG BRO instructions BRF ENDPG PVG { printf("Programme valide\n");YYACCEPT; };
 
 declarations : declaration declarations | declaration | /* epsilon */;
 
-declaration : LET var_list ':' type PVG
-             | LET var_list ':' '[' type ';' ENTIER ']' PVG
-             | DEFINE CONST IDF ':' type '=' value PVG;
+declaration : LET var_list DP type PVG
+             | LET var_list DP BO type PVG ENTIER BF PVG
+             | DEFINE CONST IDF DP type EQUAL value PVG;
 
-var_list: IDF ',' var_list | IDF;
+var_list: IDF VG var_list | IDF;
 
 value : ENTIER | ENTIERS | REEL | REELS;
 
@@ -44,25 +45,26 @@ type: INT | FLOAT;
 
 instructions : instruction instructions | /* epsilon */;
 
-instruction : affectation ';'
+instruction : affectation PVG
             | condition
             | boucle
-            | io ';';
+            | io PVG;
 
-affectation : IDF AFF expression | IDF "[" ENTIER "]" AFF expression;
+affectation : IDF AFF expression | IDF BO ENTIER BF AFF expression;
 
-condition : IF '(' cheking ')' THEN '{' instructions '}' ELSE '{' instructions '}';
+condition : IF PO cheking PF THEN BRO instructions BRF ELSE BRO instructions BRF;
 
-boucle : DO '{' instructions '}' WHILE '(' cheking ')' PVG;
-       | FOR IDF FROM expression TO expression STEP ENTIER '{' instructions '}';
+boucle : DO BRO instructions BRF WHILE PO cheking PF PVG;
+       | FOR IDF FROM expression TO expression STEP ENTIER BRO instructions BRF;
 
-io : INPUT '(' IDF ')' PVG
-   | OUTPUT '(' OP ')' PVG;
+io : INPUT PO IDF PF PVG
+   | OUTPUT PO OP PF PVG;
 
-OP : expression | STRING | OP ',' OP; 
+ 
+ OP : IDF | STRING | OP VG OP; 
 
 
-expression : REEL | REELS | ENTIER | ENTIERS | IDF | IDF '[' EXPRESSION ']' expression ADD expression | expression SUB expression
+expression : REEL | REELS | ENTIER | ENTIERS | IDF | IDF BO expression BF expression ADD expression | expression SUB expression
            | expression MUL expression | expression DIV expression;
 
 cheking :  expression AND expression | expression OR expression | NOT expression
@@ -72,8 +74,8 @@ cheking :  expression AND expression | expression OR expression | NOT expression
 
 %%
 
-void yyerror(YYLTYPE *loc, const char *s) {
-    fprintf(stderr, "Erreur syntaxique: %s\n", s);
+void yyerror(const char *s) {
+    fprintf(stderr, "Erreur syntaxique ligne %d: %s\n", nbl, s);
 }
 
 int main() {

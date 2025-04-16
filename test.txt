@@ -1,6 +1,10 @@
 MainPrgm monrog;
+
 Var
-  let x : Int;
-BeginPg {
+let x : Float;
+
+BeginPg
+{
   input(x);
-} EndPg
+  }
+EndPg

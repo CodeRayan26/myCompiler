@@ -13,6 +13,7 @@ ltr [a-z]
 cfr [0-9]
 pvg ";"
 dp ":"
+vg ","
 string  \"[^\"]*\"
 
 /*declaration des mot cle*/
@@ -67,6 +68,8 @@ le        "<="
 eq        "=="
 ne        "!="
 
+equal "="
+
 /*partie instruction*/
 po "("
 pf ")"
@@ -114,14 +117,21 @@ brf"}"
 
 {string}      { printf("%s\n", yytext);return STRING; }
 {pvg}         { printf("%s\n", yytext);return PVG; }
-{dp}          { printf("%s\n", yytext); }
+{dp}          { printf("%s\n", yytext);return DP; }
+{vg}          { printf("%s\n", yytext);return VG; }
+
+{equal}       { printf("%s\n", yytext);return EQUAL; }
 
 {idf} {
     if(yyleng > 14) {
-        {printf(" idf trop long;");return ERROR};
-    else {printf(" %s idf", yytext);return IDF;}
+        printf(" idf trop long;");
+    }
+    else {
+        printf(" %s ", yytext);
+        return IDF;
+    }
 }
-}
+
 {reel}       { printf("%s\n", yytext);return REEL; }
 {reels}      { printf("%s\n", yytext);return REELS; }
 {entier}     { printf("%s\n", yytext);return ENTIER; }
@@ -148,14 +158,15 @@ brf"}"
 {ne}         { printf("%s\n", yytext);return NE; }
 
 
-{po}         { printf("%s\n", yytext); }
-{pf}         { printf("%s\n", yytext); }
-{bo}         { printf("%s\n", yytext); }
-{bf}         { printf("%s\n", yytext); }
-{bro}        { printf("%s\n", yytext); }
-{brf}        { printf("%s\n", yytext); }
 
-[ \t]+    {/* ignorer les espaces et tabulations */}
+{po}         { printf("%s\n", yytext);return PO; }
+{pf}         { printf("%s\n", yytext);return PF; }
+{bo}         { printf("%s\n", yytext);return BO; }
+{bf}         { printf("%s\n", yytext);return BF; }
+{bro}        { printf("%s\n", yytext);return BRO; }
+{brf}        { printf("%s\n", yytext);return BRF; }
+
+[ \t]+ ;   {/* ignorer les espaces et tabulations */}
 \n {nbl++; printf("\n");}
 
 . {printf(" '%s' est une erreur à la ligne %d ;\n", yytext, nbl);}
