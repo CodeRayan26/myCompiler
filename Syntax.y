@@ -3,14 +3,14 @@
 #include <stdlib.h>
 int yylex(void);
 void yyerror(const char *s);
-extern int nbl
+int nbl=1;
 %}
 
 %union {
     int ival;
     char *strval;
 }
-
+%start programme
 %token MAINPRGM VAR BEGINPG ENDPG LET IDF IF THEN ELSE DO WHILE FOR FROM TO STEP INPUT OUTPUT
 %token INT FLOAT CONST DEFINE 
 %token REEL REELS STRING ENTIER ENTIERS

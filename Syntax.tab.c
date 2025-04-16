@@ -74,7 +74,7 @@
 #include <stdlib.h>
 int yylex(void);
 void yyerror(const char *s);
-extern int nbl
+int nbl=1;
 
 
 /* Line 189 of yacc.c  */

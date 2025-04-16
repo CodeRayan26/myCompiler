@@ -1,6 +1,6 @@
 %{
   #include "syntax.tab.h"
-  int nbl=1;
+  extern int nbl;
 %}
 
 

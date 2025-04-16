@@ -1,4 +1,4 @@
-MainPrgm monProg;
+MainPrgm monrog;
 Var
   let x : Int;
 BeginPg {

@@ -461,7 +461,7 @@ char *yytext;
 #define INITIAL 0
 #line 2 "lexic.l"
   #include "syntax.tab.h"
-  int nbl=1;
+  extern int nbl;
 /* declaration des commentaires*/
 /* declaration des regex de base*/
 /*declaration des mot cle*/
