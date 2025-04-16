@@ -39,8 +39,8 @@ write     "output"
 
 
 /* declaration des valeure numerique*/
-reel     {cfr}++"."{cfr}*
-reels   \([+-]{cfr}++"."{cfr}*\)
+reel     {cfr}+\.{cfr}*
+reels   \([+-]?{cfr}+\.{cfr}*\)
 entier   {cfr}+
 entiers \([+-]{cfr}+\)
 
@@ -83,12 +83,12 @@ brf"}"
 {cmnt1} {printf(" Ligne %d est un commentaire;", nbl);}
 {cmnt2} {
     /*i can't explain cmnt2 in a comment, if you didn't understand call me*/
-    int cmnt2 = 0;
+    int newlines = 0;
     for(int i = 0; i < yyleng; i++){
-        if(yytext[i] == '\n') cmnt2++;
+        if(yytext[i] == '\n') newlines++;
     }
-    printf(" De Ligne %d a %d est un multi commentaire;", nbl, nbl+cmnt2);
-    nbl = nbl+cmnt2;
+    printf(" De Ligne %d a %d est un multi commentaire;", nbl, nbl+newlines);
+    nbl = nbl+newlines;
 }
 
 {mainprgm}    { printf("%s\n", yytext);return MAINPRGM; }
@@ -117,10 +117,11 @@ brf"}"
 {dp}          { printf("%s\n", yytext); }
 
 {idf} {
-    if(yyleng > 14) printf(" idf trop long;");
+    if(yyleng > 14) {
+        {printf(" idf trop long;");return ERROR};
     else {printf(" %s idf", yytext);return IDF;}
 }
-
+}
 {reel}       { printf("%s\n", yytext);return REEL; }
 {reels}      { printf("%s\n", yytext);return REELS; }
 {entier}     { printf("%s\n", yytext);return ENTIER; }

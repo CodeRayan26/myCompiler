@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 int yylex(void);
-void yyerror(const char *s);
+void yyerror(YYLTYPE *loc,const char *s);
 int nbl=1;
 %}
 
@@ -20,16 +20,25 @@ int nbl=1;
 %token GT LT GE LE EQ NE 
 %token PVG
 
+%left OR
+%left AND
+%left NOT
+%left EQ NE LT GT LE GE
+%left ADD SUB
+%left MUL DIV
+
 %%
 programme : MAINPRGM IDF ';' VAR declarations BEGINPG '{' instructions '}' ENDPG { printf("Programme valide\n"); };
 
 declarations : declaration declarations | declaration | /* epsilon */;
 
 declaration : LET var_list ':' type PVG
-             | LET var_list ':' '[' type PVG ENTIER ']' PVG
-             | DEFINE CONST IDF ':' type '=' ENTIER PVG;
+             | LET var_list ':' '[' type ';' ENTIER ']' PVG
+             | DEFINE CONST IDF ':' type '=' value PVG;
 
 var_list: IDF ',' var_list | IDF;
+
+value : ENTIER | ENTIERS | REEL | REELS;
 
 type: INT | FLOAT;
 
@@ -50,10 +59,10 @@ boucle : DO '{' instructions '}' WHILE '(' cheking ')' PVG;
 io : INPUT '(' IDF ')' PVG
    | OUTPUT '(' OP ')' PVG;
 
-OP : OP2 |OP2','OP; 
-OP2: STRING | IDF;
+OP : expression | STRING | OP ',' OP; 
 
-expression : REEL | REELS | ENTIER | ENTIERS | IDF | expression ADD expression | expression SUB expression
+
+expression : REEL | REELS | ENTIER | ENTIERS | IDF | IDF '[' EXPRESSION ']' expression ADD expression | expression SUB expression
            | expression MUL expression | expression DIV expression;
 
 cheking :  expression AND expression | expression OR expression | NOT expression
@@ -63,7 +72,7 @@ cheking :  expression AND expression | expression OR expression | NOT expression
 
 %%
 
-void yyerror(const char *s) {
+void yyerror(YYLTYPE *loc, const char *s) {
     fprintf(stderr, "Erreur syntaxique: %s\n", s);
 }
 
