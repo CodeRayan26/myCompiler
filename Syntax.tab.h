@@ -66,29 +66,30 @@
      ENTIER = 282,
      ENTIERS = 283,
      EQUAL = 284,
-     ADD = 285,
-     SUB = 286,
-     MUL = 287,
-     DIV = 288,
-     AFF = 289,
-     AND = 290,
-     OR = 291,
-     NOT = 292,
-     GT = 293,
-     LT = 294,
-     GE = 295,
-     LE = 296,
-     EQ = 297,
-     NE = 298,
-     VG = 299,
-     DP = 300,
-     PVG = 301,
-     PO = 302,
-     PF = 303,
-     BRO = 304,
-     BRF = 305,
-     BO = 306,
-     BF = 307
+     ERR = 285,
+     ADD = 286,
+     SUB = 287,
+     MUL = 288,
+     DIV = 289,
+     AFF = 290,
+     AND = 291,
+     OR = 292,
+     NOT = 293,
+     GT = 294,
+     LT = 295,
+     GE = 296,
+     LE = 297,
+     EQ = 298,
+     NE = 299,
+     VG = 300,
+     DP = 301,
+     PVG = 302,
+     PO = 303,
+     PF = 304,
+     BRO = 305,
+     BRF = 306,
+     BO = 307,
+     BF = 308
    };
 #endif
 
@@ -101,13 +102,14 @@ typedef union YYSTYPE
 /* Line 1676 of yacc.c  */
 #line 9 "syntax.y"
 
-    int ival;
-    char *strval;
+    int entier;
+    char* str;
+    float numvrg;
 
 
 
 /* Line 1676 of yacc.c  */
-#line 111 "syntax.tab.h"
+#line 113 "syntax.tab.h"
 } YYSTYPE;
 # define YYSTYPE_IS_TRIVIAL 1
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */

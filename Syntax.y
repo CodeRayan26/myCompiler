@@ -1,14 +1,15 @@
 %{
 #include <stdio.h>
+#include "ts.h"
 int yylex(void);
 void yyerror(const char *s);
 int nbl=1;
 %}
 
 %union {
-    int ival;
-    float fval;
-    char *strval;
+    int entier;
+    char* str;
+    float numvrg;
 }
 
 %start programme
@@ -80,7 +81,9 @@ cheking :  expression AND expression | expression OR expression | NOT expression
 
 %%
 int main() {
+    initialization();
     return yyparse();
+    afficher();
 }
 void yyerror(const char *s) {
     fprintf(stderr, "Erreur syntaxique ligne %d: %s\n", nbl, s);

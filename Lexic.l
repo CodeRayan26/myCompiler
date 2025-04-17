@@ -1,6 +1,7 @@
-%{
+%{#include "ts.h"
   #include "syntax.tab.h"
   extern int nbl;
+  extern YYSTYPE yylval;
 %}
 
 
@@ -173,4 +174,6 @@ brf"}"
 
 %%
 
-
+int yywrap() {
+    return 1;
+}
